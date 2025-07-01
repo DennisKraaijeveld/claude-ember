@@ -28,7 +28,7 @@ Ember requires the [Zen MCP Server](https://github.com/BeehiveInnovations/zen-mc
 ### 1. Install Ember
 
 ```bash
-npx @denniskraaijeveld/hello-ember
+npx hello-ember
 ```
 
 This sets up the folder structure and installs/updates the command files in your project. Can also be used to update an existing installation - command files get backed up automatically.
