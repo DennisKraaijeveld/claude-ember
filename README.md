@@ -1,19 +1,34 @@
-# Simone for Claude Code
+# Ember for Claude Code
 
 ## What is this?
 
-Simone is a directory-based project management system I built to work better with Claude Code. It's basically a set of folders, markdown files, and custom commands that help break down software projects into manageable chunks that AI can handle effectively.
+Ember is an advanced directory-based project management system built to work seamlessly with Claude Code. It's an slimmed down version of the Simone framework, featuring a sophisticated set of folders, markdown files, and custom commands that help break down complex software projects into manageable, AI-friendly chunks.
 
-**⚠️ Complexity Warning**: Simone is a sophisticated system that requires time to understand properly. It's not a simple plug-and-play solution, but rather a framework that works best when you take the time to learn how it operates and adapt it to your workflow.
+**⚠️ Complexity Warning**: Ember is a sophisticated system that requires time to understand properly. It's not a simple plug-and-play solution, but rather a comprehensive framework that works best when you take the time to learn how it operates and adapt it to your workflow.
 
 **📋 Latest Updates**: See [CHANGELOG.md](CHANGELOG.md) for recent changes and improvements.
 
-## How to Get Started
+## Attribution
 
-### 1. Install Simone
+This project is based on [@Helmi's claude-simone](https://github.com/Helmi/claude-simone), which introduced the directory-based project management approach for AI-assisted development. Ember is a streamlined version, optimized for token efficiency and tailored for complex codebase workflows.
+
+## Prerequisites
+
+### Zen MCP Server (Required)
+
+Ember requires the [Zen MCP Server](https://github.com/BeehiveInnovations/zen-mcp-server) to be installed and configured, as it's essential for the code review functionality integrated into the workflow.
 
 ```bash
-npx hello-simone
+# Install Zen MCP Server (follow their installation guide)
+# This is required for Ember's code review capabilities
+```
+
+## How to Get Started
+
+### 1. Install Ember
+
+```bash
+npx hello-ember
 ```
 
 This sets up the folder structure and installs/updates the command files in your project. Can also be used to update an existing installation - command files get backed up automatically.
@@ -23,157 +38,180 @@ This sets up the folder structure and installs/updates the command files in your
 Open your project in Claude Code and run:
 
 ```
-/project:simone:initialize
+/project:ember:initialize
 ```
 
-This guides you through the basic setup process. Works with new or existing codebases, and can help you create project documentation (PRDs, architecture docs) or work with documents you already have.
+This guides you through the comprehensive setup process. Works with new or existing codebases, and can help you create detailed project documentation (PRDs, architecture docs, technical specs) or work with documents you already have.
 
 ### 3. Set Up Your First Milestone
 
-Create a milestone folder in `.simone/02_REQUIREMENTS/` named `M01_Your_Milestone_Name` (e.g., `M01_Basic_Application`). Include at least:
+Create a milestone folder in `.ember/02_REQUIREMENTS/` named `M01_Your_Milestone_Name` (e.g., `M01_Backend_Setup`). Include at least:
 
-- `M01_PRD.md` - Product requirements document
-- Other specs as needed: `M01_Database_Schema.md`, `M01_API_Specs.md`, etc.
+- `M01_milestone_meta.md` - Milestone metadata and overview
+- `PRD_*.md` - Product requirements documents
+- `SPECS_*.md` - Technical specifications
 
-*Note: There's no command for this yet. Use the existing chat from step 2 to guide Claude through milestone creation, ensuring proper naming with the `M##_` prefix and underscores.*
+_Note: Use the existing chat from step 2 to guide Claude through milestone creation, ensuring proper naming with the `M##_` prefix and underscores.\_
 
 ### 4. Break Down into Sprints
 
 ```
-/project:simone:create_sprints_from_milestone
+/project:ember:create_sprints_from_milestone
 ```
 
-This analyzes your milestone and breaks it down into logical sprints. It looks at the entire scope and creates meaningful sprint boundaries without detailed tasks yet.
+This analyzes your milestone and breaks it down into logical sprints with clear boundaries. It examines the entire scope and creates meaningful sprint structures without detailed tasks yet.
 
 ### 5. Create Your First Tasks
 
 ```
-/project:simone:create_sprint_tasks
+/project:ember:create_sprint_tasks
 ```
 
-This analyzes your sprints, reviews documentation, researches necessary information, and identifies knowledge gaps to gain comprehensive understanding of your project. Creates detailed, actionable tasks for the current sprint.
+This analyzes your sprints, reviews all documentation, researches necessary information, and identifies knowledge gaps to gain comprehensive understanding of your project. Creates detailed, actionable tasks scoped for individual Claude sessions.
 
-*Important: Only create tasks for your next sprint, not all sprints upfront. After completing Sprint 1, then create tasks for Sprint 2. This ensures the system can reference your existing codebase and incorporate completed work into future task creation.*
+_Important: Only create tasks for your next sprint, not all sprints upfront. After completing Sprint 1, then create tasks for Sprint 2. This ensures the system can reference your existing codebase and incorporate completed work into future task creation._
 
 ### 6. Start Working
 
 ```
-/project:simone:do_task
+/project:ember:do_task
 ```
 
 This will automatically pick a task from your general tasks or sprints. For faster execution, specify a task ID:
 
 ```
-/project:simone:do_task T01_S01
+/project:ember:do_task T01_S01
 ```
 
-Claude will then work through the specified task with full project context.
+Claude will then work through the specified task with full project context and comprehensive understanding.
 
 That's the basic workflow to get started! You can also:
 
-- Create general tasks with `/project:simone:create_general_task`
-- Use YOLO mode to run a full sprint autonomously
-- Explore other commands in `.claude/commands/simone/`
+- Create general tasks with `/project:ember:create_general_task`
+- Review code quality with `/project:ember:code_review`
+- Explore other commands in `.claude/commands/ember/`
 
-**Important**: Simone is a complex system, not a simple set-and-forget tool. It works best when you understand how it operates. Take time to read through the commands and consider adapting them to your workflow.
+**Important**: Ember is a sophisticated system, not a simple set-and-forget tool. It works best when you understand how it operates. Take time to read through the commands and consider adapting them to your workflow.
 
 ## How it Works
 
-Simone organizes your project into:
+Ember organizes your project into a hierarchical structure:
 
-- **Milestones**: Major features or project phases
-- **Sprints**: Groups of related tasks within a milestone
-- **Tasks**: Individual work items scoped for one Claude session
+- **Milestones**: Major features or project phases with comprehensive documentation
+- **Sprints**: Groups of related tasks within a milestone with clear deliverables
+- **Tasks**: Individual work items scoped for one Claude session with detailed context
 
-Each task gets full project context so Claude knows exactly what to build and how it fits into your architecture.
+Each task gets comprehensive project context so Claude knows exactly what to build, how it fits into your architecture, and what dependencies exist.
 
-## Why I built this
+## Why Ember was Built
 
 AI coding tools have become incredibly powerful, but they all face the same fundamental challenge: context management. The context window is limited in size, and we have little control over what stays in context and what doesn't.
 
 The problem with long-running sessions is context decay - as you work, critical project knowledge silently falls off the end of the context window. You don't know what's been forgotten until something goes wrong.
 
-My solution: Start fresh for each task, but provide rich surrounding context. By keeping tasks focused and well-scoped, I can dedicate more of the context window to relevant project knowledge, requirements, and architectural decisions. This way:
+Ember's solution: Start fresh for each task, but provide rich, structured surrounding context. By keeping tasks focused and well-scoped, we can dedicate more of the context window to relevant project knowledge, requirements, architectural decisions, and technical specifications. This way:
 
 - Each task starts with exactly the project context it needs
 - No critical knowledge gets lost in long sessions
-- Claude can work confidently with full awareness of requirements
+- Claude can work confidently with full awareness of requirements and constraints
 - The surrounding context guides development, not just the task description
+- Complex projects remain manageable through systematic decomposition
 
-The result is a task-based workflow where Claude always has the right context for the job at hand.
+The result is a task-based workflow where Claude always has the right context for the job at hand, with sophisticated project management capabilities.
 
 ## Key Components
 
 ### 00_PROJECT_MANIFEST.md
 
-The central document containing the project's vision, goals, and high-level overview. It serves as the starting point for Claude to understand the project. **Important**: The manifest file must be named exactly `00_PROJECT_MANIFEST.md`, not `MANIFEST.md`.
+The central document containing the project's vision, goals, high-level overview, and current status tracking. It serves as the starting point for Claude to understand the project comprehensively. **Important**: The manifest file must be named exactly `00_PROJECT_MANIFEST.md`.
 
 ### 01_PROJECT_DOCS/
 
-Contains general project documentation including technical specifications, user guides, and API documentation that Claude can reference.
+Contains comprehensive project documentation including:
+
+- Technical architecture documentation
+- API documentation with implementation details
+- Development guides and conventions
+- System design specifications
+- Performance and optimization guides
 
 ### 02_REQUIREMENTS/
 
-Organized by milestones, this directory stores product requirements documents (PRDs) and their amendments, providing a clear view of what needs to be built. This helps Claude understand the project requirements. Milestone folders must follow the naming convention `M##_Milestone_Name/` (e.g., `M01_Backend_Setup/`).
+Organized by milestones, this directory stores detailed requirements documentation:
+
+- Product Requirements Documents (PRDs)
+- Technical specifications (SPECS)
+- Milestone metadata with Definition of Done criteria
+- Requirements amendments and updates
+  Milestone folders must follow the naming convention `M##_Milestone_Name/` (e.g., `M01_Backend_Setup/`).
 
 ### 03_SPRINTS/
 
-Contains sprint plans and task definitions organized by milestone and sprint sequence. Each sprint folder contains individual task files with detailed information for Claude to work on.
+Contains sprint plans and task definitions organized by milestone and sprint sequence:
+
+- Sprint metadata with goals and deliverables
+- Individual task files with detailed implementation guidance
+- Sprint progress tracking
+- Cross-sprint dependency management
 
 ### 04_GENERAL_TASKS/
 
-Stores task definitions for work not tied to a specific sprint. Completed tasks use a `TX` prefix (e.g., `TX001_Completed_Task.md`), making it easy for Claude to identify what's been done.
+Stores task definitions for work not tied to a specific sprint:
 
-### 05_ARCHITECTURAL_DECISIONS/
-
-Captures significant architectural decisions as Architecture Decision Records (ADRs), documenting the context, options considered, and rationale. This provides critical context for Claude when making technical decisions. Uses a structured ADR template for consistency.
-
-### 10_STATE_OF_PROJECT/
-
-Contains timestamped project review snapshots created by the `project_review` command. These provide a historical record of project health, technical decisions, and progress over time.
+- Completed tasks use a `TX` prefix (e.g., `TX001_Completed_Task.md`)
+- Open tasks use a `T` prefix
+- Cross-cutting concerns and maintenance tasks
+- Technical debt and optimization work
 
 ### 99_TEMPLATES/
 
-Contains standardized templates for different document types to ensure consistency for both humans and Claude:
+Contains standardized templates for consistent documentation:
 
 - Task templates with structured objectives and acceptance criteria
 - Sprint and milestone metadata templates
-- ADR template for documenting architectural decisions
+- ADR templates for architectural decisions
 - All templates use simplified date formats (YYYY-MM-DD HH:MM)
 
-### .claude/commands/simone/
+### .claude/commands/ember/
 
-Custom Claude Code commands that power the Simone workflow:
+Custom Claude Code commands that power the Ember workflow:
 
-- `initialize` - Set up project structure and documentation
+- `initialize` - Set up comprehensive project structure and documentation
 - `create_sprints_from_milestone` - Break milestones into logical sprints
 - `create_sprint_tasks` - Generate detailed tasks from sprint plans
 - `do_task` - Execute individual tasks with full context
-- `yolo` - Autonomous sprint execution (use with caution)
-- And many more for testing, reviewing, and project management
+- `code_review` - Perform comprehensive code quality reviews
+- `create_general_task` - Create standalone tasks for maintenance work
+- And more commands for testing, reviewing, and project management
 
 ## Directory Structure
 
 ```plaintext
-.simone/
+.ember/
 ├── 00_PROJECT_MANIFEST.md
 ├── 01_PROJECT_DOCS/
+│   ├── ARCHITECTURE.md
+│   ├── API_DOCS.md
+│   ├── DEVELOPMENT_GUIDE.md
+│   └── ...
 ├── 02_REQUIREMENTS/
 │   ├── M01_Backend_Setup/
+│   │   ├── M01_milestone_meta.md
+│   │   ├── PRD_Backend_Setup.md
+│   │   └── SPECS_API_V1.md
 │   ├── M02_Frontend_Setup/
 │   └── ...
 ├── 03_SPRINTS/
 │   ├── S01_M01_Initial_API/
+│   │   ├── sprint_meta.md
+│   │   ├── T01_S01_Setup_Project_Structure.md
+│   │   └── ...
 │   ├── S02_M01_Database_Schema/
 │   └── ...
 ├── 04_GENERAL_TASKS/
 │   ├── TX001_Refactor_Logging_Module.md  # Completed task
 │   ├── T002_API_Rate_Limiting.md          # Open task
 │   └── ...
-├── 05_ARCHITECTURE_DECISIONS/
-│   ├── ADR001_Database_Selection.md
-│   └── ...
-├── 10_STATE_OF_PROJECT/         # Project review snapshots
 └── 99_TEMPLATES/
     ├── task_template.md
     ├── sprint_meta_template.md
@@ -184,7 +222,7 @@ Custom Claude Code commands that power the Simone workflow:
 
 ### Enabling Parallel Task Execution
 
-While Simone commands like `create_sprint_tasks` support the `useParallelSubagents` instruction, Claude Code needs to be configured to actually execute tasks in parallel. By default, it only runs one task at a time.
+While Ember commands like `create_sprint_tasks` support the `useParallelSubagents` instruction, Claude Code needs to be configured to actually execute tasks in parallel. By default, it only runs one task at a time.
 
 To enable parallel execution:
 
@@ -203,17 +241,25 @@ claude config list -g
 - Some tasks may have conflicts when run in parallel
 - Start with a small number (2-3) and adjust based on your experience
 
+## Enhanced Features in Ember
+
+### Sophisticated Project Management
+
+- Detailed milestone tracking with Definition of Done criteria
+- Sprint progress monitoring and dependency management
+- Comprehensive task lifecycle management
+- Advanced project state tracking
+
+### Advanced Task Management
+
+- Task complexity assessment and time estimation
+- Cross-sprint dependency tracking
+- Automated progress reporting
+- Quality gate enforcement
+
 ## Contributing & Feedback
 
-I'd love to hear from you! This is very much shaped by how I work, and I'm sure there are tons of improvements to be made.
+Ember represents an evolution of project management for AI-assisted development. We'd love to hear from you!
 
 - **GitHub Issues**: Best place for bugs and feature requests
-- **Anthropic Discord**: Find me @helmi if you want to chat about it
 - **Pull Requests**: Very welcome! Let's make this better together
-
-I'm particularly interested in:
-
-- How you're using it differently
-- What's missing for your workflow
-- Ideas for better Claude Code integration
-- Different organizational approaches

@@ -22,21 +22,21 @@ Follow these instructions to sprint the scope of a Milestone into Sprints
 **USE PARALLEL SUBAGENTS** to do these tasks:
 
 - Parse arguments for milestone ID (defaults to current milestone from PROJECT_MANIFEST)
-- Read `.simone/00_PROJECT_MANIFEST.md` to understand current progress
-- Scan `.simone/03_SPRINTS/` to identify existing sprints for the target milestone
-- For each existing sprint, read its sprint meta file to determine status from YAML frontmatter
+- Read `.ember/00_PROJECT_MANIFEST.md` to understand current progress
+- Scan `.ember/03_SPRINTS/` to identify existing sprints for the target milestone
+- For each existing sprint RELATED to the Milestone $ARGUMENTS, ONLY read its sprint meta file to determine status from YAML frontmatter
 - Analyze the Tasks in Sprints to understand that work that has been done (from Subtasks)
 
 ## 2 · Assess completed work vs milestone requirements
 
-- Read milestone meta file from `.simone/02_REQUIREMENTS/$MILESTONE_ID/`
+- Read milestone meta file from `.ember/02_REQUIREMENTS/$MILESTONE_ID/`
 - **CRITICAL:** Follow and read ALL linked documents in the milestone meta:
   - Product Requirements (PRD.md)
   - Database Specifications (SPECS_DB.md)
   - API Specifications (SPECS_API.md)
   - Tool Specifications (SPECS_TOOLS.md)
   - Any other linked specifications
-- Study the milestone's Definition of Done (DoD) carefully and **think deeply** about what each DoD criterion actually requires in terms of specific deliverables
+- Study the milestone's Definition of Done (DoD) carefully and **think deeply** about what each DoD criterion actually requires in terms of specific deliverables. You could use Zen MCP if you wish to spar with Gemini about complex architecture decisions.
 - For each existing sprint, analyze what deliverables have been completed by reading sprint meta and task files
 - **Think more carefully** about the gap analysis: map each completed deliverable against specific DoD requirements and identify what's genuinely missing vs what might already be covered
 - Create clear picture: "What's done vs what's required for milestone completion" with specific justification for each gap identified
@@ -47,7 +47,6 @@ Follow these instructions to sprint the scope of a Milestone into Sprints
 - Group related deliverables that have natural dependencies
 - **CRITICAL:** Each deliverable group should be:
   - **Independently valuable** (shippable increment)
-  - **Completable in ~1 week** by one person
   - **Has clear validation criteria**
 - Consider technical dependencies (e.g., auth before UI, LLM integration before tools)
 
@@ -59,13 +58,14 @@ Follow these instructions to sprint the scope of a Milestone into Sprints
   - **Natural boundaries**: Minimal dependencies between sprints
   - **Incremental value**: Each sprint advances toward milestone DoD
 - Sprint naming: `S<nn>_$milestone_id_$focus_slug`
+- **IMPORTANT:** Don't create ANY tests. You clearly don't have the context to write consistent and effective tests.
 - **IMPORTANT:** Don't create sprints for work that's already completed
 
 ## 5 · Create sprint directories and meta files
 
 - For each planned sprint that doesn't exist:
-  - Create directory `.simone/03_SPRINTS/$FULL_SPRINT_NAME/` (using complete sprint name like "S02_M01_LLM_Integration")
-  - Use template from `.simone/99_TEMPLATES/sprint_meta_template.md`
+  - Create directory `.ember/03_SPRINTS/$FULL_SPRINT_NAME/` (using complete sprint name like "S02_M01_LLM_Integration")
+  - Use template from `.ember/99_TEMPLATES/sprint_meta_template.md`
   - Fill in sprint meta with:
     - High-level goal and scope
     - Key deliverables (bullet points, not detailed tasks)
@@ -74,12 +74,12 @@ Follow these instructions to sprint the scope of a Milestone into Sprints
 
 ## 6 · Update PROJECT_MANIFEST with sprint roadmap
 
-- Update `.simone/00_PROJECT_MANIFEST.md`:
-  - Set `highest_sprint_in_milestone` to the highest planned sprint
-  - Update sprint summary section with overview of remaining sprints
-  - Mark completed sprints as ✅ COMPLETED
-  - Show planned sprints with their focus areas
-  - Update `last_updated` timestamp
+- Update `.ember/00_PROJECT_MANIFEST.md`:
+- Set `highest_sprint_in_milestone` to the highest planned sprint
+- Update sprint summary section with overview of remaining sprints
+- Mark completed sprints as ✅ COMPLETED
+- Show planned sprints with their focus areas
+- Update `last_updated` timestamp
 
 ## 7 · Validate sprint coherence and dependencies
 
@@ -87,7 +87,7 @@ Follow these instructions to sprint the scope of a Milestone into Sprints
 - Ensure each sprint builds naturally on previous work
 - Verify no sprint has impossible dependencies
 - Check that sprint sequence leads to milestone DoD completion
-- **Think about** whether each sprint is independently testable and valuable
+- **Think about** whether each sprint is valueable and not overly complex. For instance: Monitoring is often easily implemented by Sentry and product analytics with PostHog. In those cases we don't need to plan a sprint for building those solutions ourselves. Sprints should be focused on delivering value to the user.
 
 ## 8 · Report milestone plan
 

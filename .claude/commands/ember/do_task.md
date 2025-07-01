@@ -19,7 +19,7 @@
 
 ## 2 · Identify task file
 
-Search .simone/03_SPRINTS/ and .simone/04_GENERAL_TASKS/.
+Search .ember/03_SPRINTS/ and .ember/04_GENERAL_TASKS/.
 If no open task matches, pause and ask the user how to proceed.
 
 ## 3 · Analyse the task
@@ -28,10 +28,8 @@ Read the task description. If anything is unclear, ask clarifying questions befo
 
 **CRITICAL CONTEXT VALIDATION:** Before executing any task spin up Parallel Subagents for these tasks:
 
-1. **Sprint Context:** Confirm task belongs to current sprint scope
-2. **Dependencies:** Check if any dependent tasks need to be completed first
-3. **Requirements:** Read relevant requirements docs in `.simone/02_REQUIREMENTS/`
-4. **Scope Verification:** Ensure task aligns with current sprint objectives
+1. **Sprint Context:** Confirm task belongs to current sprint scope and if any dependencies need to be completed first
+2. **Requirements:** Read relevant requirements docs in `.ember/02_REQUIREMENTS/`
 
 **IMPORTANT:** If task references functionality from future sprints or has unmet dependencies, pause and ask for clarification.
 
@@ -39,18 +37,19 @@ Read the task description. If anything is unclear, ask clarifying questions befo
 
 - Find out the current local timestamp (YYYY-MM-DD HH:MM).
 - Update front-matter to **status: in_progress** and set Updated time
-- Update ./simone/00_PROJECT_MANIFEST.md to set task in progress, updated time and current Sprint Status.
+- Update .ember/00_PROJECT_MANIFEST.md to set task in progress, updated time and current Sprint Status.
 
 ## 5 · Execute task work
 
 - Follow Description, Goal and Acceptance Criteria.
-- Consult supporting docs in .simone/01_PROJECT_DOCS/ and .simone/02_REQUIREMENTS/.
+- Consult supporting docs in .ember/01_PROJECT_DOCS/ and .ember/02_REQUIREMENTS/.
 - Iterate over subtasks:
   1. Pick the next incomplete subtask.
   2. Implement the required changes, consulting docs as needed.
   3. Mark the subtask done.
   4. Append a log entry to **## Output Log** using the format `[YYYY-MM-DD HH:MM]: <message>`.
   5. Repeat until all subtasks are complete.
+  6. Make sure typecheck is passing. If possible, fix the type errors. If it's not possible due to dependencies, add a note to the task file.
 
 ## 6 · Placeholder
 
@@ -58,10 +57,10 @@ Placeholder - just move on to the next step
 
 ## 7 · Execute Code Review
 
-Follow these steps for a Code Review (in order)
+Follow these steps for a **ENHANCED CODE REVIEW WITH ZEN** (in order)
 
-- include @.claude/commands/simone/code_review.md and use the Task ID as Scope.
-- Follow the instructions in the file to run a code review in **PARALLEL SUBAGENTS**
+- include @.claude/commands/ember/code_review.md and use the Task ID as Scope.
+- Follow the instructions in the file to run a code review in **PARALLEL SUBAGENTS** and use the `zen:review` mcp tool to perform comprehensive code analysis.
 - When done continue acting on the results accordingly
 - Understand and think about the results
 - on **FAIL**
@@ -75,7 +74,7 @@ Follow these steps for a Code Review (in order)
 
 - set the Task status to **completed**
 - Rename the Task file accordingly to enable proper Completed recognition from the filename (TX[TASK_ID]...)
-- Update .simone/00_PROJECT_MANIFEST.md to reflect the new status
+- Update .ember/00_PROJECT_MANIFEST.md to reflect the new status
 - **Report** the result to the user
 
   ✅ **Result**: Quick statement of success
@@ -87,6 +86,5 @@ Follow these steps for a Code Review (in order)
   ⏭️ **Next steps**: Recommended follow-up actions
 
 - **Suggestions** for the User:
-
-  - 🛠️ Use /project:simone:commit `TASK_ID` to commit the changes to git
+  - 🛠️ Use /project:ember:commit `TASK_ID` to commit the changes to git
   - 🧹 Use /clear to clear the context before starting the next Task

@@ -23,46 +23,57 @@ If empty, use default, otherwise interpret <$ARGUMENTS> to identify the scope of
 
 **CONTEXT:** Before reviewing code changes:
 
-- Read `.simone/00_PROJECT_MANIFEST.md` to understand current sprint and milestone context
+- Read `.ember/00_PROJECT_MANIFEST.md` to understand current sprint and milestone context
 - Use the manifest to identify which sprint is active and what work is in scope
 - Only evaluate against requirements appropriate for the current sprint's deliverables
+- If scope unclear, request clarification before proceeding
 
 ### 2. Find code changes within Scope
 
 With the identified Scope use `git diff` (on default: `git diff HEAD~1`) to find code changes.
 
+- If no meaningful changes found, EXIT with "No changes to review"
+
 ### 3. Find relevant Specifications and Documentation
 
 - FIND the Task, Sprint and Milestone involved in the work that was done and output your findings
-- Navigate to `.simone/03_SPRINTS/` to find the current sprint directory
-- READ the sprint meta file to understand sprint objectives and deliverables
+- Navigate to `.ember/03_SPRINTS/` to find the current sprint directory
+- READ the sprint meta file to understand sprint objectives and deliverables FIRST (highest priority)
 - If a specific task is in scope, find and READ the task file in the sprint directory
-- IDENTIFY related requirements in `.simone/02_REQUIREMENTS/` for the current milestone
-- READ involved Documents especially in `.simone/01_PROJECT_DOCS/` and `.simone/02_REQUIREMENTS/`
+- IDENTIFY related requirements in `.ember/02_REQUIREMENTS/` for the current milestone
+- READ only RELEVANT Documents especially in `.ember/01_PROJECT_DOCS/` and `.ember/02_REQUIREMENTS/`
 - **IMPORTANT:** Focus on current sprint deliverables, not future milestone features
 
 ### 4. Compare code changes against Documentation and Requirements
 
-- Use DEEP THINKING to compare changes against found Requirements and Specs.
-- Compare especially these things:
+**ZEN-ONLY CODE REVIEW:**
+
+- Use the `zen:review` mcp tool to perform comprehensive code analysis.
+- Pass all relevant files identified in the code changes to the zen code review tool.
+- Ensure the zen review checks for strict compliance with all found Requirements, Specs, and Documentation:
   - **Data models / schemas** — fields, types, constraints, relationships.
   - **APIs / interfaces** — endpoints, params, return shapes, status codes, errors.
   - **Config / environment** — keys, defaults, required/optional.
   - **Behaviour** — business rules, side-effects, error handling.
   - **Quality** — naming, formatting, tests, linter status.
-
-**IMPORTANT**:
-
-- Deviations from the Specs is not allowed. Not even small ones. Be very picky here!
-- If in doubt call a **FAIL** and ask the User.
-- Zero tolerance on not following the Specs and Documentation.
+- Deviations from the Specs are not allowed. Be extremely strict.
+- If zen review finds any issues, call a **FAIL** and ask the User.
+- Zero tolerance for not following the Specs and Documentation.
 
 ### 5. Analyze the differences
 
-- Analyze any difference found
-- Give every issue a Severity Score
-- Severity ranges from 1 (low) to 10 (high)
-- Remember List of issues and Scores for output
+**ANALYZE ZEN CODE REVIEW RESULTS:**
+
+- Analyze zen code review results and categorize findings by severity
+- Consolidate all issues found from zen review
+- Give every issue a Severity Score based on zen classification:
+  - **Critical (9-10)**: Security vulnerabilities, data corruption risks, spec violations
+  - **High (7-8)**: Logic errors, API contract violations, major requirement deviations
+  - **Medium (5-6)**: Code quality issues, minor spec deviations, maintainability concerns
+  - **Low (1-4)**: Style issues, documentation gaps, optimization opportunities
+- Remember consolidated list of issues and scores for output
+
+- **PRIORITIZE** zen-identified critical and high severity issues
 
 ### 6. Provide PASS/FAIL verdict with details
 
@@ -74,14 +85,16 @@ With the identified Scope use `git diff` (on default: `git diff HEAD~1`) to find
 #### IMPORTANT: Output Format
 
 - Output the results of your review to the task's **## Output Log** section in the task file
-- Find the task file in `.simone/03_SPRINTS/` or `.simone/04_GENERAL_TASKS/` based on the scope
+- Find the task file in `.ember/03_SPRINTS/` or `.ember/04_GENERAL_TASKS/` based on the scope
 - Append the review results to the existing Output Log with timestamp
 - Output Format:
   ```
-  [YYYY-MM-DD HH:MM]: Code Review - PASS/FAIL
+  [YYYY-MM-DD HH:MM]: Code Review - PASS/FAIL (Enhanced with Zen Analysis)
   Result: **FAIL/PASS** Your final decision on if it's a PASS or a FAIL.
   **Scope:** Inform the user about the review scope.
-  **Findings:** Detailed list with all Issues found and Severity Score.
+  **Zen Analysis:** Summary of zen code review findings and overall assessment.
+  **Manual Validation:** Results of manual specification compliance check.
+  **Consolidated Findings:** Detailed list with all Issues found and Severity Score (Critical/High/Medium/Low).
   **Summary:** Short summary on what is wrong or not.
   **Recommendation:** Your personal recommendation on further steps.
   ```

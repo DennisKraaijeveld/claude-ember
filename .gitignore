@@ -9,13 +9,11 @@ Thumbs.db
 
 # Root level files (except specific allowed files)
 /*
-!/.simone
+!/.ember
 !/.claude
 !/.gitignore
 !/README.md
 !/LICENSE
-!/SYNC_GUIDE.md
-!/sync-simone.sh
 !/CHANGELOG.md
 
 # Editor directories and files
